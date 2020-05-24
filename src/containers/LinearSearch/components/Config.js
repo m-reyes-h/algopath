@@ -1,6 +1,8 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
+// Component ----------------------------------------------------------
+
 function Config() {
   return (
     <header className="d-flex my-4 align-items-center ">

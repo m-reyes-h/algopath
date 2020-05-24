@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 // Style --------------------------------------------------------------
 
+// todo needs to be visible
 const AsideSt = styled.aside`
   width: 300px;
   background-color: red;

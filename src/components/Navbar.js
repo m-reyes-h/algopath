@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { MdGrain as AnalyzeIcon } from "react-icons/md";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
@@ -43,13 +43,14 @@ const NavSt = styled.nav`
 
 // Component ----------------------------------------------------------
 
+// todo navbar need to move left
 function Navbar() {
   return (
     <NavSt className="navbar navbar-expand-sm navbar-light bg-white fixed-top">
       <div className="container">
-        <a className="navbar-brand" href="/#">
+        <Link className="navbar-brand" to="/">
           AlgoPath
-        </a>
+        </Link>
 
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav ml-auto">

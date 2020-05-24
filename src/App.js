@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, BrowserRouter as Router } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 import PublicRoute from "./components/PublicRoute";
 import MainLayout from "./components/MainLayout";
 import Search from "./pages/Search";
@@ -9,12 +10,19 @@ import Sort from "./pages/Sort";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <PublicRoute exact path="/" component={Search} layout={MainLayout} />
-        <PublicRoute exact path="/sort" component={Sort} layout={MainLayout} />
-      </Switch>
-    </Router>
+    <RecoilRoot>
+      <Router>
+        <Switch>
+          <PublicRoute exact path="/" component={Search} layout={MainLayout} />
+          <PublicRoute
+            exact
+            path="/sort"
+            component={Sort}
+            layout={MainLayout}
+          />
+        </Switch>
+      </Router>
+    </RecoilRoot>
     // <div
     //   className="container-fluid d0flex min-vh-100"
     //   style={{ paddingTop: "75px", paddingRight: "300px" }}
