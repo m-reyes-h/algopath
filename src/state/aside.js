@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 const AiseAtom = atom({
   key: "asideOpen",
-  default: false,
+  default: true,
 });
 
 export default AiseAtom;
