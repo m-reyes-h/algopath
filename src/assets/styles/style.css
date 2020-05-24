@@ -45,6 +45,16 @@ body {
   letter-spacing: 0.00938rem;
 }
 
+/**
+ * Animation for aside
+ */
+.navbar,
+.container,
+.container-fluid,
+.page-aside {
+  transition: all 400ms ease;
+}
+
 .border {
   border-color: var(--theme-grey-300) !important;
 }

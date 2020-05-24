@@ -3,12 +3,15 @@ import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { MdGrain as AnalyzeIcon } from "react-icons/md";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { useRecoilState } from "recoil";
+import asideOpen from "../state/aside";
 
 // Style --------------------------------------------------------------
 
 const NavSt = styled.nav`
   height: 75px;
   border-bottom: 1px solid ${(props) => props.theme.palette.grey[300]};
+  right: ${(props) => (props.asideOpen ? "300px" : "0px")};
 
   .navbar-brand {
     color: ${(props) => props.theme.palette.text.primary} !important;
@@ -43,10 +46,16 @@ const NavSt = styled.nav`
 
 // Component ----------------------------------------------------------
 
-// todo navbar need to move left
 function Navbar() {
+  const [isOpen, setIsOpen] = useRecoilState(asideOpen);
+
+  // Component ----------------------------------------------------------
+
   return (
-    <NavSt className="navbar navbar-expand-sm navbar-light bg-white fixed-top">
+    <NavSt
+      className="navbar navbar-expand-sm navbar-light bg-white fixed-top"
+      asideOpen={isOpen}
+    >
       <div className="container">
         <Link className="navbar-brand" to="/">
           AlgoPath
@@ -74,7 +83,11 @@ function Navbar() {
                 placement="bottom"
                 overlay={<Tooltip>Analyzer</Tooltip>}
               >
-                <button type="button" className="nav-link border-0 bg-white">
+                <button
+                  type="button"
+                  className="nav-link border-0 bg-white"
+                  onClick={() => setIsOpen(!isOpen)}
+                >
                   <AnalyzeIcon size={24} />
                 </button>
               </OverlayTrigger>

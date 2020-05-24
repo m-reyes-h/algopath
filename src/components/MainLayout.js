@@ -1,19 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import asideOpen from "../state/aside";
 import Navbar from "./Navbar";
+
+// Style --------------------------------------------------------------
+
+const LayoutSt = styled.div`
+  padding-top: 75px;
+  padding-right: ${(props) => (props.asideOpen ? "300px" : "0px")};
+`;
 
 // Component ----------------------------------------------------------
 
-// todo must padding right 300
 function MainLayout({ children }) {
+  const [isOpen] = useRecoilState(asideOpen);
+
+  // Component ----------------------------------------------------------
+
   return (
-    <div
-      className="container-fluid d-flex min-vh-100"
-      style={{ paddingTop: "75px", paddingRight: "300px" }}
-    >
+    <LayoutSt className="container-fluid d-flex min-vh-100" asideOpen={isOpen}>
       <Navbar />
       {children}
-    </div>
+    </LayoutSt>
   );
 }
 
