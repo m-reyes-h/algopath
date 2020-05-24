@@ -14,7 +14,6 @@ function Config() {
         <Form.Control type="range" custom />
       </div>
       <Form.Control
-        value="Sorting speed"
         as="select"
         size="sm"
         custom

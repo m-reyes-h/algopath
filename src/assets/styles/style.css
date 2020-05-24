@@ -384,6 +384,11 @@ a:visited {
   background-color: var(--theme-grey-50) !important;
 }
 
+button[type="button"]:active,
+button[type="button"]:focus {
+  outline: 1px dotted var(--theme-grey-700) !important;
+}
+
 /**
  * Modal
  */

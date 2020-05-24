@@ -7,12 +7,16 @@ import asideOpen from "../../../state/aside";
 
 const AsideSt = styled.aside`
   width: 300px;
-  background-color: red;
+  background-color: ${(props) => props.theme.palette.common.white};
   position: fixed;
   right: 0;
   top: 0;
   transition-duration: 400ms;
+  box-shadow: ${(props) => props.theme.palette.shadows[2]};
+  border-left: 1px solid ${(props) => props.theme.palette.grey[300]};
   transform: translateX(${(props) => (props.asideOpen ? "0px" : "300px")});
+  z-index: 1031;
+  background-color: ${(props) => props.theme.palette.grey[50]};
 `;
 
 // Component ----------------------------------------------------------

@@ -1,10 +1,11 @@
 import React from "react";
-import { Switch, BrowserRouter as Router } from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import PublicRoute from "./components/PublicRoute";
 import MainLayout from "./components/MainLayout";
 import Search from "./pages/Search";
 import Sort from "./pages/Sort";
+import NotFound from "./pages/404";
 
 // Component ----------------------------------------------------------
 
@@ -20,6 +21,7 @@ function App() {
             component={Sort}
             layout={MainLayout}
           />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     </RecoilRoot>

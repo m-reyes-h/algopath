@@ -24,7 +24,10 @@ function Grid() {
   return (
     <GridSt className="grid">
       {new Array(50).fill("0").map((v, index) => (
-        <div className="box border d-inline-flex justify-content-center align-items-center">
+        <div
+          key={index}
+          className="box border d-inline-flex justify-content-center align-items-center"
+        >
           {index}
         </div>
       ))}
