@@ -14,6 +14,7 @@ const GridSt = styled.div`
     height: 46px;
     width: 46px;
     border-radius: 3px;
+    user-select: none;
   }
 `;
 
