@@ -13,6 +13,7 @@
   --theme-palette-error-main: #f44336;
   --red: var(--theme-palette-error-main);
   --danger: var(--theme-palette-error-main);
+  --theme-palette-yellow-light: #fff9c4;
   --theme-palette-text-primary: rgba(0, 0, 0, 0.87);
   --theme-palette-text-secondary: rgba(0, 0, 0, 0.54);
   --theme-palette-text-disabled: rgba(0, 0, 0, 0.38);

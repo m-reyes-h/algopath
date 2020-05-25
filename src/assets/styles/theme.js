@@ -14,11 +14,19 @@ const theme = {
       main: "#f44336",
       dark: "#d32f2f",
     },
+    info: {
+      light: "#E1F5FE",
+      main: "#00B0FF",
+    },
     success: {
       light: "#81c784",
       main: "#4caf50",
       dark: "#388e3c",
       contrastText: "rgba(0, 0, 0, 0.87)",
+    },
+    yellow: {
+      light: "#FFF9C4",
+      main: "#FFA000",
     },
     grey: {
       50: "#fafafa",

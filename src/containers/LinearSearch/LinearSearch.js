@@ -1,5 +1,5 @@
 import React from "react";
-import Config from "./components/Config";
+import ToolBar from "./components/ToolBar";
 import Grid from "./components/Grid";
 import Aside from "./components/Aside/Aside";
 
@@ -9,7 +9,7 @@ function LinearSearch() {
   return (
     <>
       <Aside title="Linear Search" />
-      <Config />
+      <ToolBar />
       <div className="mt-5 pb-4 pt-3">
         <Grid />
       </div>

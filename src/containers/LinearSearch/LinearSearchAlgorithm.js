@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 // linear search
 // iterate across of the array from left to right, searching forspecified element.
 // Pseudocode:
@@ -21,25 +22,21 @@
 // linearSearch(linearArr, target)
 
 function timer(ms) {
-  ms *= 1000;
-  return new Promise((res) => setTimeout(res, ms));
+  const sec = ms < 1 ? 1000 / 2 : ms * 1000;
+  return new Promise((res) => setTimeout(res, sec));
 }
 
-async function LinearSearchAlgorithm(get, target, set) {
-  const { values } = get;
-  let { speed } = get;
+async function LinearSearchAlgorithm(config, UpdateConfig) {
+  const { speed, target, values } = config;
 
   for (let i = 0, j = values.length; i < j; i += 1) {
-    const current = values[i];
-    set({ ...get, current });
+    const current = i;
+    UpdateConfig({ ...config, current });
 
-    console.log(current, target);
-
-    if (current === target) {
+    if (values[i] === target) {
+      UpdateConfig({ ...config, founded: true, current });
       return true;
     }
-
-    // convert to milliseconds
 
     // make this function (loop) to run every speed time
     await timer(speed);

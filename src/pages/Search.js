@@ -2,6 +2,7 @@ import React from "react";
 import { Tab, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import LinearSearch from "../containers/LinearSearch/LinearSearch";
+import LSContextProvider from "../containers/LinearSearch/context/LSContext";
 
 // Style --------------------------------------------------------------
 
@@ -47,7 +48,9 @@ export default () => {
         </NavSubSt>
         <Tab.Content>
           <Tab.Pane eventKey="linear">
-            <LinearSearch />
+            <LSContextProvider>
+              <LinearSearch />
+            </LSContextProvider>
           </Tab.Pane>
           <Tab.Pane eventKey="binary">
             <p>Md</p>

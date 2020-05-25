@@ -1,54 +1,53 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
-import { randomArray } from "../../../utils/common";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { lsValues, lsConfig } from "../state/atoms";
+import LinearSearchAlgorithm from "../LinearSearchAlgorithm";
+import { randomArray, randomValue } from "../../../utils/common";
+import { LSContext } from "../context/LSContext";
 
 // Component ----------------------------------------------------------
 
 function Config() {
-  const lsValuesState = useRecoilValue(lsValues);
-  const lsValuesUpdate = useSetRecoilState(lsValues);
-  const lsConfigState = useRecoilValue(lsConfig);
-  const lsConfigUpdate = useSetRecoilState(lsConfig);
+  const { config, updateConfig } = useContext(LSContext);
+  const [arraySize, setArraySize] = useState(config.arraySize);
+  const [target, setTarget] = useState(config.target);
+  const [speed, setSpeed] = useState(config.speed);
 
-  const [arraySize, setArraySize] = React.useState(lsValuesState.arraySize);
-  const [target, setTarget] = React.useState(lsConfigState.target);
-  const [speed, setSpeed] = React.useState(lsConfigState.speed);
-
-  const handleRandomize = () => {
-    const newValues = randomArray(1, lsValuesState.arraySize);
-    lsValuesUpdate((prev) => ({
-      ...prev,
+  const updateValues = (size) => {
+    const newValues = randomArray(1, size);
+    const newTarget = randomValue(size);
+    setTarget(newTarget);
+    updateConfig({
+      ...config,
       values: newValues,
-    }));
+      arraySize: size,
+      target: newTarget,
+    });
   };
 
   const handleArraySize = (e) => {
-    const { value } = e.target;
-    setArraySize(value);
-    lsValuesUpdate((prev) => ({
-      ...prev,
-      arraySize: value,
-    }));
+    const size = e.target.value;
+    setArraySize(size);
+    updateValues(size);
+  };
+
+  const handleRandomize = () => {
+    updateValues(config.arraySize);
   };
 
   const handleTarget = (e) => {
-    const { value } = e.target;
-    setTarget(value);
-    lsConfigUpdate((prev) => ({
-      ...prev,
-      target: value,
-    }));
+    const newTarget = parseInt(e.target.value, 10);
+    setTarget(newTarget);
+    updateConfig({ ...config, target: newTarget });
   };
 
-  const hanldeSpeed = (e) => {
-    const val = parseInt(e.target.value, 10);
-    setSpeed(val);
-    lsConfigUpdate((prev) => ({
-      ...prev,
-      speed: val,
-    }));
+  const handleSpeed = (e) => {
+    const newSpeed = parseInt(e.target.value, 10);
+    setSpeed(newSpeed);
+    updateConfig({ ...config, speed: newSpeed });
+  };
+
+  const handleStart = () => {
+    LinearSearchAlgorithm(config, updateConfig);
   };
 
   // --------------------------------------------------------------------
@@ -71,8 +70,8 @@ function Config() {
           type="range"
           custom
           min="3"
-          max="200"
-          step="10"
+          max="100"
+          step="3"
           value={arraySize}
           onChange={handleArraySize}
         />
@@ -84,9 +83,9 @@ function Config() {
         size="sm"
         custom
         value={`${speed} sec.`}
-        onChange={hanldeSpeed}
         className="btn btn-outline-secondary "
         style={{ width: "150px" }}
+        onChange={handleSpeed}
       >
         <option>Sorting speed</option>
         <option>0 sec.</option>
@@ -120,7 +119,11 @@ function Config() {
 
       {/* Start */}
       <div className="ml-auto">
-        <button type="button" className="btn btn-sm btn-outline-primary">
+        <button
+          type="button"
+          className="btn btn-sm btn-outline-primary"
+          onClick={handleStart}
+        >
           Start
         </button>
       </div>

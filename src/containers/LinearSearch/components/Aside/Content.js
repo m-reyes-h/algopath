@@ -2,6 +2,7 @@ import React from "react";
 import { Tab, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Wiki from "./Wiki";
+import Steps from "./Steps";
 
 // Style --------------------------------------------------------------
 
@@ -51,7 +52,9 @@ function Content() {
           </Nav.Item>
         </NavSubSt>
         <TabContentSt>
-          <Tab.Pane eventKey="linear">sfs</Tab.Pane>
+          <Tab.Pane eventKey="linear" className="p-2">
+            <Steps />
+          </Tab.Pane>
           <Tab.Pane eventKey="binary" className="p-2">
             <Wiki />
           </Tab.Pane>
