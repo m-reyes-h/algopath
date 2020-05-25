@@ -10,7 +10,7 @@ function LinearSearch() {
     <>
       <Aside title="Linear Search" />
       <Config />
-      <div className="mt-5 pt-5">
+      <div className="mt-5 pb-4 pt-3">
         <Grid />
       </div>
     </>

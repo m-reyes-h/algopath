@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import linearSearchAtom from "../../../state/linearSearch";
+import { randomArray } from "../../../utils/common";
 
 // Style --------------------------------------------------------------
 
@@ -21,14 +24,23 @@ const GridSt = styled.div`
 // Component ----------------------------------------------------------
 
 function Grid() {
+  const [rState, setRState] = useRecoilState(linearSearchAtom);
+
+  React.useEffect(() => {
+    const values = randomArray(1, rState.valueSize);
+    setRState({ ...rState, values });
+  }, []);
+
+  // --------------------------------------------------------------------
+
   return (
     <GridSt className="grid">
-      {new Array(50).fill("0").map((v, index) => (
+      {rState.values.map((value, index) => (
         <div
           key={index}
           className="box border d-inline-flex justify-content-center align-items-center"
         >
-          {index}
+          {value}
         </div>
       ))}
     </GridSt>
