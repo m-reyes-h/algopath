@@ -1,56 +1,54 @@
 import React from "react";
-import { useRecoilState } from "recoil";
 import { Form } from "react-bootstrap";
-import { randomArray, randomValue } from "../../../utils/common";
-import linearSearchAtom from "../../../state/linearSearch";
-import linearSearchAlgorithm from "../../../utils/LinearSearchAlgorithm";
+import { randomArray } from "../../../utils/common";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { lsValues, lsConfig } from "../state/atoms";
 
 // Component ----------------------------------------------------------
 
 function Config() {
-  const [rState, setRState] = useRecoilState(linearSearchAtom);
-  const [arraySize, setArraySize] = React.useState(rState.valueSize);
-  const [target, setTarget] = React.useState(rState.target);
-  const [speed, setSpeed] = React.useState(rState.speed);
+  const lsValuesState = useRecoilValue(lsValues);
+  const lsValuesUpdate = useSetRecoilState(lsValues);
+  const lsConfigState = useRecoilValue(lsConfig);
+  const lsConfigUpdate = useSetRecoilState(lsConfig);
+
+  const [arraySize, setArraySize] = React.useState(lsValuesState.arraySize);
+  const [target, setTarget] = React.useState(lsConfigState.target);
+  const [speed, setSpeed] = React.useState(lsConfigState.speed);
 
   const handleRandomize = () => {
-    const newTarget = randomValue(arraySize);
-    const valuesArr = randomArray(1, arraySize);
-
-    setRState((prevState) => ({
-      ...prevState,
-      target: newTarget,
-      values: valuesArr,
+    const newValues = randomArray(1, lsValuesState.arraySize);
+    lsValuesUpdate((prev) => ({
+      ...prev,
+      values: newValues,
     }));
-
-    setTarget(newTarget);
   };
-
-  React.useEffect(() => {
-    handleRandomize();
-  }, [arraySize]);
 
   const handleArraySize = (e) => {
     const { value } = e.target;
-    setRState((prevState) => ({ ...prevState, valueSize: value }));
     setArraySize(value);
+    lsValuesUpdate((prev) => ({
+      ...prev,
+      arraySize: value,
+    }));
   };
 
   const handleTarget = (e) => {
     const { value } = e.target;
-    setRState((prevState) => ({ ...prevState, target: value }));
     setTarget(value);
+    lsConfigUpdate((prev) => ({
+      ...prev,
+      target: value,
+    }));
   };
 
-  // todo speed must be delete the sorting speed  to be a label like an input
-  const handleSpeed = (e) => {
-    const value = parseInt(e.target.value, 10);
-    setRState((prevState) => ({ ...prevState, speed: value }));
-    setSpeed(value);
-  };
-
-  const handleStart = () => {
-    linearSearchAlgorithm(rState, target, setRState);
+  const hanldeSpeed = (e) => {
+    const val = parseInt(e.target.value, 10);
+    setSpeed(val);
+    lsConfigUpdate((prev) => ({
+      ...prev,
+      speed: val,
+    }));
   };
 
   // --------------------------------------------------------------------
@@ -85,8 +83,8 @@ function Config() {
         as="select"
         size="sm"
         custom
-        onChange={handleSpeed}
         value={`${speed} sec.`}
+        onChange={hanldeSpeed}
         className="btn btn-outline-secondary "
         style={{ width: "150px" }}
       >
@@ -122,11 +120,7 @@ function Config() {
 
       {/* Start */}
       <div className="ml-auto">
-        <button
-          type="button"
-          className="btn btn-sm btn-outline-primary"
-          onClick={handleStart}
-        >
+        <button type="button" className="btn btn-sm btn-outline-primary">
           Start
         </button>
       </div>

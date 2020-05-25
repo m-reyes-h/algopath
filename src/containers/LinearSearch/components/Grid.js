@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
-import linearSearchAtom from "../../../state/linearSearch";
-import { randomArray } from "../../../utils/common";
+import { useRecoilValue } from "recoil";
+import { lsValuesSelector } from "../state/selectors";
 
 // Style --------------------------------------------------------------
 
@@ -24,18 +23,13 @@ const GridSt = styled.div`
 // Component ----------------------------------------------------------
 
 function Grid() {
-  const [rState, setRState] = useRecoilState(linearSearchAtom);
-
-  React.useEffect(() => {
-    const values = randomArray(1, rState.valueSize);
-    setRState({ ...rState, values });
-  }, []);
+  const { values } = useRecoilValue(lsValuesSelector);
 
   // --------------------------------------------------------------------
 
   return (
     <GridSt className="grid">
-      {rState.values.map((value, index) => (
+      {values.map((value, index) => (
         <div
           key={index}
           className="box border d-inline-flex justify-content-center align-items-center"
