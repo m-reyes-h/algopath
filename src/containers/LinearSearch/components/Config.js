@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { Form } from "react-bootstrap";
 import { randomArray, randomValue } from "../../../utils/common";
 import linearSearchAtom from "../../../state/linearSearch";
+import linearSearchAlgorithm from "../../../utils/LinearSearchAlgorithm";
 
 // Component ----------------------------------------------------------
 
@@ -13,8 +14,16 @@ function Config() {
   const [speed, setSpeed] = React.useState(rState.speed);
 
   const handleRandomize = () => {
-    setTarget(randomValue(arraySize));
-    setRState({ ...rState, values: randomArray(1, arraySize) });
+    const newTarget = randomValue(arraySize);
+    const valuesArr = randomArray(1, arraySize);
+
+    setRState((prevState) => ({
+      ...prevState,
+      target: newTarget,
+      values: valuesArr,
+    }));
+
+    setTarget(newTarget);
   };
 
   React.useEffect(() => {
@@ -23,21 +32,25 @@ function Config() {
 
   const handleArraySize = (e) => {
     const { value } = e.target;
-    setRState({ ...rState, valueSize: value });
+    setRState((prevState) => ({ ...prevState, valueSize: value }));
     setArraySize(value);
   };
 
   const handleTarget = (e) => {
     const { value } = e.target;
-    setRState({ ...rState, target: value });
+    setRState((prevState) => ({ ...prevState, target: value }));
     setTarget(value);
   };
 
   // todo speed must be delete the sorting speed  to be a label like an input
   const handleSpeed = (e) => {
     const value = parseInt(e.target.value, 10);
-    setRState({ ...rState, speed: value });
+    setRState((prevState) => ({ ...prevState, speed: value }));
     setSpeed(value);
+  };
+
+  const handleStart = () => {
+    linearSearchAlgorithm(rState, target, setRState);
   };
 
   // --------------------------------------------------------------------
@@ -106,8 +119,14 @@ function Config() {
           <span>Target</span>
         </label>
       </div>
+
+      {/* Start */}
       <div className="ml-auto">
-        <button type="button" className="btn btn-sm btn-outline-primary">
+        <button
+          type="button"
+          className="btn btn-sm btn-outline-primary"
+          onClick={handleStart}
+        >
           Start
         </button>
       </div>

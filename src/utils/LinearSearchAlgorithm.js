@@ -1,7 +1,3 @@
-import React from "react";
-import { useRecoilState } from "recoil";
-import linearSearchAtom from "../state/linearSearch";
-
 // linear search
 // iterate across of the array from left to right, searching forspecified element.
 // Pseudocode:
@@ -24,20 +20,32 @@ import linearSearchAtom from "../state/linearSearch";
 // const target = 0
 // linearSearch(linearArr, target)
 
-function LinearSearch() {
-  const [rState, setRState] = useRecoilState(linearSearchAtom);
-  const { values, target } = rState;
+function timer(ms) {
+  ms *= 1000;
+  return new Promise((res) => setTimeout(res, ms));
+}
+
+async function LinearSearchAlgorithm(get, target, set) {
+  const { values } = get;
+  let { speed } = get;
 
   for (let i = 0, j = values.length; i < j; i += 1) {
     const current = values[i];
-    setRState({ ...rState, current });
+    set({ ...get, current });
+
+    console.log(current, target);
 
     if (current === target) {
       return true;
     }
+
+    // convert to milliseconds
+
+    // make this function (loop) to run every speed time
+    await timer(speed);
   }
 
   return false;
 }
 
-export default LinearSearch;
+export default LinearSearchAlgorithm;
