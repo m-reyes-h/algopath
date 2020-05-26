@@ -26,20 +26,34 @@ function timer(ms) {
   return new Promise((res) => setTimeout(res, sec));
 }
 
-async function LinearSearchAlgorithm(config, UpdateConfig) {
+async function LinearSearchAlgorithm(config, updateConfig) {
   const { speed, target, values } = config;
 
   for (let i = 0, j = values.length; i < j; i += 1) {
+    // set current
     const current = i;
-    UpdateConfig({ ...config, current });
+    updateConfig({ ...config, current });
+
+    // step 0
+    if (i === 0) {
+      updateConfig({ ...config, current, step: 0 });
+    }
+    await timer(speed / 3);
+
+    // set step 2
+    updateConfig({ ...config, current, step: 1 });
+    await timer(speed / 3);
+
+    // set step 1
+    updateConfig({ ...config, current, step: 2 });
 
     if (values[i] === target) {
-      UpdateConfig({ ...config, founded: true, current });
+      updateConfig({ ...config, founded: true, current, step: 1 });
       return true;
     }
 
     // make this function (loop) to run every speed time
-    await timer(speed);
+    await timer(speed / 3);
   }
 
   return false;

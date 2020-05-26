@@ -24,8 +24,8 @@ const StepSt = styled.div`
     li {
       margin: 0.55rem 0;
       padding: 0.25rem;
-      &.highlight {
-        background-color: ${(props) => props.theme.palette.yellow.light};
+      &.bold {
+        color: ${(props) => props.theme.palette.text.primary} !important;
       }
     }
   }
@@ -37,7 +37,7 @@ function Steps() {
   const { config } = useContext(LSContext);
 
   // --------------------------------------------------------------------
-  console.log(config.step);
+
   return (
     <StepSt>
       {/* Pseudocode */}
@@ -46,15 +46,21 @@ function Steps() {
           <div className="card-title body2 subtitle2">Pseudocode</div>
           <div className="card-text body2 text-secondary">
             <ul className="pl-3">
-              <li className={`${config.step === 0 ? "highlight" : "nop"}`}>
+              <li
+                className={`${
+                  config.step === 0 && config.current === 0 ? "bold" : ""
+                }`}
+              >
                 Repeat, starting at the first element:
               </li>
               <ul className="pl-3">
-                <li>
+                <li className={`${config.step === 1 ? "bold" : ""}`}>
                   if the first element is what you're looking for (the target),
                   stop.
                 </li>
-                <li>Otherwise, move to the next element.</li>
+                <li className={`${config.step === 2 ? "bold" : ""}`}>
+                  Otherwise, move to the next element.
+                </li>
               </ul>
             </ul>
           </div>

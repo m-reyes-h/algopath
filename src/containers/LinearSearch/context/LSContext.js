@@ -51,6 +51,7 @@ const LSContextProvider = ({ children }) => {
     // Algorithm UI
     current: -1,
     founded: false,
+    step: 0,
   });
 
   const updateConfig = (newConfig) => {
