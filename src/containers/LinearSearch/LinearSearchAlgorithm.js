@@ -21,8 +21,9 @@
 // const target = 0
 // linearSearch(linearArr, target)
 
-function timer(ms) {
-  const sec = ms < 1 ? 1000 / 2 : ms * 1000;
+function timer(ms, times) {
+  let sec = ms < 1 ? 500 : ms * 1000;
+  sec /= times;
   return new Promise((res) => setTimeout(res, sec));
 }
 
@@ -38,11 +39,11 @@ async function LinearSearchAlgorithm(config, updateConfig) {
     if (i === 0) {
       updateConfig({ ...config, current, step: 0 });
     }
-    await timer(speed / 3);
+    await timer(speed, 3);
 
     // set step 2
     updateConfig({ ...config, current, step: 1 });
-    await timer(speed / 3);
+    await timer(speed, 3);
 
     // set step 1
     updateConfig({ ...config, current, step: 2 });
@@ -53,7 +54,7 @@ async function LinearSearchAlgorithm(config, updateConfig) {
     }
 
     // make this function (loop) to run every speed time
-    await timer(speed / 3);
+    await timer(speed, 3);
   }
 
   return false;

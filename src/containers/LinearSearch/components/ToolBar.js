@@ -87,7 +87,7 @@ function Config() {
         style={{ width: "150px" }}
         onChange={handleSpeed}
       >
-        <option>Sorting speed</option>
+        <option disabled>Sorting speed</option>
         <option>0 sec.</option>
         <option>1 sec.</option>
         <option>2 sec.</option>

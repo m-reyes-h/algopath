@@ -47,7 +47,7 @@ const LSContextProvider = ({ children }) => {
     ],
     arraySize: 39,
     target: 1,
-    speed: 1,
+    speed: 0,
     // Algorithm UI
     current: -1,
     founded: false,
